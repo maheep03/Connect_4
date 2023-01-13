@@ -76,63 +76,7 @@ void print_board(char board[6][7]) {
     printf("\n");
   }
 }
-// first_capital(str, n) returns the first capital letter in str;
-// returns 0 if str contains no capital letters
-// requires: str is a string of length n
-// str contains only lower -case and upper -case letters
-// all lower -case letters appear before upper -case letters
-char first_capital(const char str[], int n) {
-  int lo = 0;
-  int hi = n - 1;
-  // If no characters are capitals
-  if (n == 0 || islower(str[hi])) {
-    return 0;
-  }
-  // If all characters are capitals
-  if (isupper(str[lo])) {
-    return str[lo];
-  }
-  while (hi != lo + 1) {
-    int mid = (hi + lo) / 2;
-    if (isupper(str[mid])) {
-      hi = mid;
-    } else {
-      lo = mid;
-    }
-  }
-  return str[hi];
-}
-// deepest_substring(str, out) updates out to be the deepest substring of
-// str; the first is used if multiple possibilities exist
-// requires:
-// str is a string with balanced parenthesis
-// out points to enough memory to store the deepest substring of str
-void deepest_substring(const char str[], char out[]) {
-  int max_depth = 0;
-  const char * deepest_substring = str;
-  int cur_depth = 0;
-  // Find deepest substring
-  while ( * str != '\0') {
-    if ( * str == '(') {
-      cur_depth++;
-      if (cur_depth > max_depth) {
-        max_depth = cur_depth;
-        deepest_substring = str + 1;
-      }
-    } else if ( * str == ')') {
-      cur_depth--;
-    }
-    str++;
-  }
-  // Copy deepest substring into out
-  str = deepest_substring;
-  while ( * str != ')' && * str != '\0') {
-    * out = * str;
-    str++;
-    out++;
-  }
-  * out = '\0';
-}
+
 int main(void) {
   char board[6][7] = {
     ".......",
